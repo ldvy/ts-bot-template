@@ -13,4 +13,3 @@ var Logger = /** @class */ (function () {
     return Logger;
 }());
 exports.default = Logger;
-//# sourceMappingURL=logger.js.map

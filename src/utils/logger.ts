@@ -8,4 +8,5 @@ export default class Logger {
     public static notify(data: any): void { 
         this.logger.info(data)
     }
+    
 }

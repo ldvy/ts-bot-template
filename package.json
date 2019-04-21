@@ -4,7 +4,8 @@
   "description": "Template for creating Telegram bots",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc --watch false"
   },
   "repository": {
     "type": "git",

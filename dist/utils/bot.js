@@ -19,4 +19,3 @@ var Bot = /** @class */ (function () {
     return Bot;
 }());
 exports.default = Bot;
-//# sourceMappingURL=bot.js.map

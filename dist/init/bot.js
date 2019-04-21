@@ -10,10 +10,11 @@ var Bot = /** @class */ (function () {
     function Bot() {
     }
     Bot.configure = function () {
+        // Проверка окружения и смена токена
         process.env.NODE_ENV === 'production' ? this.token = config_json_1.default.token : this.token = config_json_1.default.devToken;
-        var bot = new telegraf_1.default(this.token);
-        bot.launch();
-        logger_1.default.trace('>>> Бот сконфигурирован!');
+        var bot = new telegraf_1.default(this.token); // Создание обьекта
+        bot.launch(); // Запуск
+        logger_1.default.trace('>>> Бот сконфигурирован');
         return bot;
     };
     return Bot;

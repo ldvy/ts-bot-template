@@ -1,1 +1,3 @@
-import Telegraf from 'telegraf'
+import Bot from './utils/bot'
+
+const bot = Bot.configure()

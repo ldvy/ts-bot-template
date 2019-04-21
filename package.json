@@ -1,0 +1,22 @@
+{
+  "name": "ts-bot-template",
+  "version": "1.0.0",
+  "description": "Template for creating Telegram bots",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vilkup/ts-bot-template.git"
+  },
+  "author": "Vilen Kuprienko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vilkup/ts-bot-template/issues"
+  },
+  "homepage": "https://github.com/vilkup/ts-bot-template#readme",
+  "dependencies": {
+    "telegraf": "^3.29.0"
+  }
+}

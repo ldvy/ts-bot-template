@@ -6,6 +6,18 @@ var Logger = /** @class */ (function () {
     Logger.trace = function (data) {
         this.logger.log('trace', data);
     };
+    Logger.debug = function (data) {
+        this.logger.log('debug', data);
+    };
+    Logger.error = function (data) {
+        this.logger.log('error', data);
+    };
+    Logger.warn = function (data) {
+        this.logger.log('warn', data);
+    };
+    Logger.fatal = function (data) {
+        this.logger.log('fatal', data);
+    };
     Logger.notify = function (data) {
         this.logger.info(data);
     };

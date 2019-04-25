@@ -9,8 +9,8 @@ export default class Bot {
         // Проверка окружения и смена токена
         process.env.NODE_ENV === 'production' ? this.token = config.prod.token : this.token = config.dev.token
 
-        const bot = new Telegraf(this.token) // Создание обьекта
-        bot.launch() // Запуск
+        const bot = new Telegraf(this.token)    // Создание обьекта
+        bot.launch()                            // Запуск
 
         Logger.trace('>>> Бот сконфигурирован')
         return bot

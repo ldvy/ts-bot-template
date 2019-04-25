@@ -7,7 +7,7 @@ var bot_1 = __importDefault(require("./init/bot"));
 var db_1 = __importDefault(require("./init/db"));
 var handlers_1 = __importDefault(require("./init/handlers"));
 var middlewares_1 = __importDefault(require("./init/middlewares"));
-var bot = bot_1.default.configure();
-middlewares_1.default.init(bot);
-handlers_1.default.init(bot);
-db_1.default.connect();
+var bot = bot_1.default.configure(); // конфигурируем бот
+middlewares_1.default.init(bot); // инициализируем прослойки
+handlers_1.default.init(bot); // инициализируем обработчики
+db_1.default.connect(); // подключаемся к БД

@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importStar(require("mongoose"));
 var mongoose_unique_validator_1 = __importDefault(require("mongoose-unique-validator"));
+// Схема пользователя
 exports.UserSchema = new mongoose_1.Schema({
     chatId: { type: String, required: true, unique: true },
     username: { type: String, unique: true },
     name: { type: String, required: true }
 });
-exports.UserSchema.plugin(mongoose_unique_validator_1.default);
-var User = mongoose_1.default.model('User', exports.UserSchema);
+exports.UserSchema.plugin(mongoose_unique_validator_1.default); // подключаем валидатор уникальности
+var User = mongoose_1.default.model('User', exports.UserSchema); // создаём модель
 exports.default = User;

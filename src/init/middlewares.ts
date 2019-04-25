@@ -4,7 +4,7 @@ import addUsers from '../middlewares/addUsers'
 import Logger from './logger'
 
 export default class Middlewares {
-    public static init(bot: api.Telegraf<api.ContextMessageUpdate>) {
+    public static init(bot: api.Telegraf<api.ContextMessageUpdate>): void {
         try {
             addUsers.init(bot) // прослойка добавления пользователя в базу
             chatLogging.init(bot) // прослойка логирования переписки

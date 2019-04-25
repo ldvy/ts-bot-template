@@ -5,7 +5,7 @@ import Logger from './logger.js'
 export default class DB {
     private static url: string
 
-    public static connect() {
+    public static connect(): void {
         // Проверка окружения и смена url базы данных
         process.env.NODE_ENV === 'production' ? this.url = config.prod.dbUrl : this.url = config.dev.dbUrl
 

@@ -1,10 +1,12 @@
 {
     "dev": {
         "token": "742077654:AAE2Pet-gf44WMGjHkI7Z6zWpAx3AVVfKFY",
-        "dbUrl": "mongodb://127.0.0.1:27017/tsbot"
+        "dbUrl": "mongodb://127.0.0.1:27017/tsbot",
+        "port": 80
     },
     "prod": {
         "token": "<TOKEN>",
-        "dbUrl": "mongodb://127.0.0.1:27017/tsbot"
+        "dbUrl": "mongodb://127.0.0.1:27017/tsbot",
+        "port": 8080
     }
 }

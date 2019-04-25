@@ -2,7 +2,7 @@ import * as api from 'telegraf'
 import Logger from '../init/logger'
 
 export default class chatLogging {
-    public static init(bot: api.Telegraf<api.ContextMessageUpdate>) {
+    public static init(bot: api.Telegraf<api.ContextMessageUpdate>): void {
         bot.use(async (ctx, next) => {
             // Получаем данные о пользователе из контекста
             let username = ctx.from.username

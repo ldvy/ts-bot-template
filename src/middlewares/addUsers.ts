@@ -3,7 +3,7 @@ import User from '../models/user'
 import Logger from '../init/logger'
 
 export default class addUsers {
-    public static init(bot: api.Telegraf<api.ContextMessageUpdate>) {
+    public static init(bot: api.Telegraf<api.ContextMessageUpdate>): void {
         bot.use(async (ctx, next) => {
             // Получаем данные о пользователе из контекста
             let chatId = ctx.from.id

@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/vilkup/ts-bot-template#readme",
   "dependencies": {
+    "@types/mongoose-unique-validator": "^1.0.1",
     "mongoose": "^5.5.2",
+    "mongoose-unique-validator": "^2.0.3",
     "simple-node-logger": "^18.12.22",
     "telegraf": "^3.29.0"
   },

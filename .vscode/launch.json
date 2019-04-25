@@ -11,6 +11,9 @@
             "program": "${workspaceFolder}\\dist\\index.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
+            ],
+            "runtimeArgs": [
+                "--no-deprecation"
             ]
         }
     ]

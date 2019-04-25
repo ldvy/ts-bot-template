@@ -5,12 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = __importDefault(require("./logger"));
 var start_1 = __importDefault(require("../handlers/start"));
+var message_1 = __importDefault(require("../handlers/message"));
 var Handlers = /** @class */ (function () {
     function Handlers() {
     }
     Handlers.init = function (bot) {
-        start_1.default.init(bot); // Обработчик старта
-        logger_1.default.trace('>>> Обработчики инициализированы');
+        try {
+            start_1.default.init(bot); // Обработчик старта
+            message_1.default.init(bot); // Обработчик любого сообщения
+            logger_1.default.trace('>>> Обработчики инициализированы');
+        }
+        catch (_a) {
+            logger_1.default.trace('XXX Произошла ошибка при инициализации обработчиков!');
+        }
     };
     return Handlers;
 }());

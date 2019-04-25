@@ -6,11 +6,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importStar(require("mongoose"));
+var mongoose_unique_validator_1 = __importDefault(require("mongoose-unique-validator"));
 exports.UserSchema = new mongoose_1.Schema({
     chatId: { type: String, required: true, unique: true },
-    username: String
+    username: { type: String, unique: true },
+    name: { type: String, required: true }
 });
+exports.UserSchema.plugin(mongoose_unique_validator_1.default);
 var User = mongoose_1.default.model('User', exports.UserSchema);
 exports.default = User;

@@ -37,42 +37,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var logger_1 = __importDefault(require("../init/logger"));
 var functions_1 = require("../helpers/functions");
 var admin_1 = __importDefault(require("../controllers/admin"));
-var Admin = /** @class */ (function () {
-    function Admin() {
-    }
-    Admin.init = function (bot) {
-        var _this = this;
-        bot.command('admin', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
-                    case 1:
-                        if (!_a.sent()) return [3 /*break*/, 3];
-                        return [4 /*yield*/, admin_1.default.send(ctx)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-        // Обработчик для "Рассылка"
-        bot.hears('Рассылка 📡', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
-                    case 1:
-                        if (_a.sent()) {
-                            ctx.scene.enter('gsend');
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    return Admin;
-}());
-exports.default = Admin;
+// Немного модулей без типов ES5
+var Markup = require('telegraf/markup');
+var Stage = require('telegraf/stage');
+var WizardScene = require('telegraf/scenes/wizard');
+/**
+ * Сцена рассылки
+ */
+exports.default = new WizardScene('gsend', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+    var keyboard;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                keyboard = Markup.keyboard([
+                    Markup.button('Назад')
+                ]).oneTime().resize().extra();
+                return [4 /*yield*/, ctx.reply('Введите сообщение для рассылки', keyboard)];
+            case 1:
+                _a.sent();
+                return [2 /*return*/, ctx.wizard.next()];
+        }
+    });
+}); }, function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                if (!(ctx.message.text === 'Назад')) return [3 /*break*/, 2];
+                return [4 /*yield*/, admin_1.default.send(ctx)];
+            case 1:
+                _a.sent();
+                return [2 /*return*/, ctx.scene.leave()];
+            case 2: return [4 /*yield*/, functions_1.sendGlobal(ctx)];
+            case 3:
+                _a.sent();
+                return [4 /*yield*/, ctx.reply('Рассылка успешно проведена! 🎉', admin_1.default.keyboard)];
+            case 4:
+                _a.sent();
+                logger_1.default.notify("\u0420\u0430\u0441\u0441\u044B\u043B\u043A\u0430 \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0430! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: " + ctx.from.id + "; \u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435: \"" + ctx.message.text + "\"");
+                return [2 /*return*/, ctx.scene.leave()];
+        }
+    });
+}); });

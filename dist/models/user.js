@@ -16,8 +16,8 @@ var mongoose_unique_validator_1 = __importDefault(require("mongoose-unique-valid
 exports.UserSchema = new mongoose_1.Schema({
     chatId: { type: String, required: true, unique: true },
     username: { type: String, unique: true },
-    name: { type: String, required: true }
+    name: { type: String },
+    isAdmin: { type: Boolean }
 });
 exports.UserSchema.plugin(mongoose_unique_validator_1.default); // подключаем валидатор уникальности
-var User = mongoose_1.default.model('User', exports.UserSchema); // создаём модель
-exports.default = User;
+exports.default = mongoose_1.default.model('User', exports.UserSchema);

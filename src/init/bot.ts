@@ -2,6 +2,9 @@ import Telegraf from 'telegraf'
 import Logger from './logger'
 import config from '../config.json'
 
+const Stage = require('telegraf/stage')
+const WizardScene = require('telegraf/scenes/wizard')
+
 export default class Bot { 
     private static token: string
 

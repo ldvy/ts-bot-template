@@ -34,45 +34,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var functions_1 = require("../helpers/functions");
-var admin_1 = __importDefault(require("../controllers/admin"));
-var Admin = /** @class */ (function () {
-    function Admin() {
+var Markup = require('telegraf/markup');
+var AdminMessage = /** @class */ (function () {
+    function AdminMessage() {
     }
-    Admin.init = function (bot) {
-        var _this = this;
-        bot.command('admin', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+    AdminMessage.send = function (ctx) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
+                    case 0: return [4 /*yield*/, ctx.reply('Heyyyyy, admin', this.keyboard)];
                     case 1:
-                        if (!_a.sent()) return [3 /*break*/, 3];
-                        return [4 /*yield*/, admin_1.default.send(ctx)];
-                    case 2:
                         _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-        // Обработчик для "Рассылка"
-        bot.hears('Рассылка 📡', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
-                    case 1:
-                        if (_a.sent()) {
-                            ctx.scene.enter('gsend');
-                        }
                         return [2 /*return*/];
                 }
             });
-        }); });
+        });
     };
-    return Admin;
+    AdminMessage.keyboard = Markup.keyboard([
+        ['Рассылка 📡', 'Статистика 📊'],
+        ['Добавить админа(ов) 👔'],
+        ['Устранить админа(ов) ✖️']
+    ]).oneTime().resize().extra();
+    return AdminMessage;
 }());
-exports.default = Admin;
+exports.default = AdminMessage;

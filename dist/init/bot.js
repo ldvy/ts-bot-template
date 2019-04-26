@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var telegraf_1 = __importDefault(require("telegraf"));
 var logger_1 = __importDefault(require("./logger"));
 var config_json_1 = __importDefault(require("../config.json"));
+var Stage = require('telegraf/stage');
+var WizardScene = require('telegraf/scenes/wizard');
 var Bot = /** @class */ (function () {
     function Bot() {
     }

@@ -38,41 +38,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var functions_1 = require("../helpers/functions");
+var stats_1 = require("../helpers/stats");
 var admin_1 = __importDefault(require("../controllers/admin"));
-var Admin = /** @class */ (function () {
-    function Admin() {
+var StatsMessage = /** @class */ (function () {
+    function StatsMessage() {
     }
-    Admin.init = function (bot) {
-        var _this = this;
-        bot.command('admin', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+    StatsMessage.send = function (ctx) {
+        return __awaiter(this, void 0, void 0, function () {
+            var allUsersCount;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
+                    case 0: return [4 /*yield*/, stats_1.getAllUsersCount()];
                     case 1:
-                        if (!_a.sent()) return [3 /*break*/, 3];
-                        return [4 /*yield*/, admin_1.default.send(ctx)];
+                        allUsersCount = _a.sent();
+                        return [4 /*yield*/, ctx.replyWithMarkdown("*\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430 \uD83D\uDCCA*\n\n\u041A\u043E\u043B-\u0432\u043E \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439: *" + allUsersCount + "*", admin_1.default.keyboard)];
                     case 2:
                         _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-        // Обработчик для "Рассылка"
-        bot.hears('Рассылка 📡', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
-                    case 1:
-                        if (_a.sent()) {
-                            ctx.scene.enter('gsend');
-                        }
                         return [2 /*return*/];
                 }
             });
-        }); });
+        });
     };
-    return Admin;
+    return StatsMessage;
 }());
-exports.default = Admin;
+exports.default = StatsMessage;

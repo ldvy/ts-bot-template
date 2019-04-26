@@ -37,36 +37,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = __importDefault(require("../init/logger"));
-var chatLogging = /** @class */ (function () {
-    function chatLogging() {
-    }
-    chatLogging.init = function (bot) {
-        var _this = this;
-        bot.use(function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
-            var username, name;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        username = ctx.from.username;
-                        name = ctx.from.first_name;
-                        // Составляем имя в зависимости от наличия фамилии
-                        if (ctx.from.last_name !== undefined)
-                            name = ctx.from.first_name + " " + ctx.from.last_name;
-                        // Логируем сообщение
-                        if (username !== undefined)
-                            logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + " (@" + username + "): \"" + ctx.message.text + "\"");
-                        else
-                            logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + ": \"" + ctx.message.text + "\"");
-                        return [4 /*yield*/, next()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    return chatLogging;
-}());
-exports.default = chatLogging;
+/**
+ * Прослойка для логирования переписки
+ * @async
+ */
+exports.default = (function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
+    var username, name;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                username = ctx.from.username;
+                name = ctx.from.first_name;
+                // Составляем имя в зависимости от наличия фамилии
+                if (ctx.from.last_name !== undefined)
+                    name = ctx.from.first_name + " " + ctx.from.last_name;
+                // Логируем сообщение
+                if (username !== undefined)
+                    logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + " (@" + username + "): \"" + ctx.message.text + "\"");
+                else
+                    logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + ": \"" + ctx.message.text + "\"");
+                return [4 /*yield*/, next()];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });

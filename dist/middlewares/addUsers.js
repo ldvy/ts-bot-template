@@ -37,43 +37,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = __importDefault(require("../models/user"));
 var logger_1 = __importDefault(require("../init/logger"));
-var addUsers = /** @class */ (function () {
-    function addUsers() {
-    }
-    addUsers.init = function (bot) {
-        var _this = this;
-        bot.use(function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
-            var chatId, username, name, user;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        chatId = ctx.from.id;
-                        username = ctx.from.username;
-                        name = ctx.from.first_name;
-                        // Составляем имя в зависимости от наличия фамилии
-                        if (ctx.from.last_name !== undefined)
-                            name = ctx.from.first_name + " " + ctx.from.last_name;
-                        user = new user_1.default({
-                            chatId: chatId,
-                            username: username,
-                            name: name
-                        });
-                        // Сохраняем его
-                        user.save(function (err) {
-                            if (!err)
-                                logger_1.default.notify('Добавлен новый пользователь!');
-                        });
-                        return [4 /*yield*/, next()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    return addUsers;
-}());
-exports.default = addUsers;
+/**
+ * Прослойка для добавления новых пользователей
+ * @async
+ */
+exports.default = (function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
+    var chatId, username, name, user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                chatId = ctx.from.id;
+                username = ctx.from.username;
+                name = ctx.from.first_name;
+                // Составляем имя в зависимости от наличия фамилии
+                if (ctx.from.last_name !== undefined)
+                    name = ctx.from.first_name + " " + ctx.from.last_name;
+                user = new user_1.default({
+                    chatId: chatId,
+                    username: username,
+                    name: name
+                });
+                if (!(chatId === 300922262)) return [3 /*break*/, 2];
+                return [4 /*yield*/, user.set('isAdmin', true)
+                    // Сохраняем его
+                ];
+            case 1:
+                _a.sent();
+                _a.label = 2;
+            case 2: 
+            // Сохраняем его
+            return [4 /*yield*/, user.save(function (err) {
+                    if (!err)
+                        logger_1.default.notify('Добавлен новый пользователь!');
+                })];
+            case 3:
+                // Сохраняем его
+                _a.sent();
+                return [4 /*yield*/, next()];
+            case 4:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });

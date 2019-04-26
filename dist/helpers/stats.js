@@ -38,41 +38,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var functions_1 = require("../helpers/functions");
-var admin_1 = __importDefault(require("../controllers/admin"));
-var Admin = /** @class */ (function () {
-    function Admin() {
-    }
-    Admin.init = function (bot) {
-        var _this = this;
-        bot.command('admin', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
-                    case 1:
-                        if (!_a.sent()) return [3 /*break*/, 3];
-                        return [4 /*yield*/, admin_1.default.send(ctx)];
-                    case 2:
-                        _a.sent();
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        }); });
-        // Обработчик для "Рассылка"
-        bot.hears('Рассылка 📡', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
-                    case 1:
-                        if (_a.sent()) {
-                            ctx.scene.enter('gsend');
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    return Admin;
-}());
-exports.default = Admin;
+var user_1 = __importDefault(require("../models/user"));
+/**
+ * Возвращает количество пользователей
+ * @async
+ * @function getAllUsersCount
+ * @returns { Promise<number> }
+ */
+function getAllUsersCount() {
+    return __awaiter(this, void 0, void 0, function () {
+        var users;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_1.default.find({})];
+                case 1:
+                    users = _a.sent();
+                    return [2 /*return*/, users.length];
+            }
+        });
+    });
+}
+exports.getAllUsersCount = getAllUsersCount;

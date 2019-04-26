@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = __importDefault(require("./logger"));
 var start_1 = __importDefault(require("../handlers/start"));
 var admin_1 = __importDefault(require("../handlers/admin"));
+var stats_1 = __importDefault(require("../handlers/stats"));
 var Handlers = /** @class */ (function () {
     function Handlers() {
     }
@@ -13,6 +14,7 @@ var Handlers = /** @class */ (function () {
         try {
             start_1.default.init(bot); // Обработчик для /start
             admin_1.default.init(bot); // Обработчик для /admin
+            stats_1.default.init(bot); // Обработчик для статистики
             logger_1.default.trace('>>> Обработчики инициализированы');
         }
         catch (_a) {

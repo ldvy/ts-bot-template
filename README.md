@@ -1,1 +1,4 @@
-# ts-bot-template
+```node
+//node code 
+console.log('I love TS!')
+```

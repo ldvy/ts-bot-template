@@ -34,43 +34,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var admin_1 = __importDefault(require("../controllers/admin"));
 var functions_1 = require("../helpers/functions");
-var Markup = require('telegraf/markup');
-var AdminsListMessage = /** @class */ (function () {
-    function AdminsListMessage() {
+var logger_1 = __importDefault(require("../init/logger"));
+var CallbackQuery = /** @class */ (function () {
+    function CallbackQuery() {
     }
-    AdminsListMessage.send = function (ctx) {
-        return __awaiter(this, void 0, void 0, function () {
-            var admins, _i, admins_1, admin, name_1, chatId, username, keyboard;
+    CallbackQuery.init = function (bot) {
+        var _this = this;
+        // Обработчик callback запроса на устранение админа
+        bot.action(/^dismiss>[0-9]+$/, function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+            var err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.getAdmins()];
+                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
                     case 1:
-                        admins = _a.sent();
-                        _i = 0, admins_1 = admins;
+                        if (!_a.sent()) return [3 /*break*/, 5];
                         _a.label = 2;
                     case 2:
-                        if (!(_i < admins_1.length)) return [3 /*break*/, 5];
-                        admin = admins_1[_i];
-                        name_1 = admin.name;
-                        chatId = admin.chatId;
-                        username = admin.username !== undefined ? admin.username : 'не указано';
-                        keyboard = Markup.inlineKeyboard([
-                            Markup.callbackButton('Отстранить', "dismiss>" + chatId)
-                        ]).extra();
-                        return [4 /*yield*/, ctx.replyWithMarkdown("*\u0418\u043C\u044F*: " + name_1 + "\n*\u042E\u0437\u0435\u0440\u043D\u0435\u0439\u043C*: " + username + "\n*ChatId*: " + chatId, keyboard)];
+                        _a.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, functions_1.dismissAdmin(+ctx.callbackQuery.data.split('>')[1])];
                     case 3:
                         _a.sent();
-                        _a.label = 4;
+                        ctx.answerCbQuery();
+                        ctx.reply('Админ успешно отстранён', admin_1.default.keyboard);
+                        return [3 /*break*/, 5];
                     case 4:
-                        _i++;
-                        return [3 /*break*/, 2];
+                        err_1 = _a.sent();
+                        logger_1.default.error(err_1);
+                        ctx.answerCbQuery();
+                        ctx.reply('Не удалось отстранить админа, приносим извинения', admin_1.default.keyboard);
+                        return [3 /*break*/, 5];
                     case 5: return [2 /*return*/];
                 }
             });
-        });
+        }); });
     };
-    return AdminsListMessage;
+    return CallbackQuery;
 }());
-exports.default = AdminsListMessage;
+exports.default = CallbackQuery;

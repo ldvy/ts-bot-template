@@ -21,7 +21,11 @@ export default class Admin {
         })
 
         // Обработчик для "Статистика"
-        bot.hears('Статистика 📊', async (ctx: api.ContextMessageUpdate) => await StatsMessage.send(ctx))
+        bot.hears('Статистика 📊', async (ctx: api.ContextMessageUpdate) => {
+            if (await isAdmin(ctx.from.id)) {
+                await StatsMessage.send(ctx)
+            }
+        })
 
         // Обработчик для "Добавить админа(ов)"
         bot.hears('Добавить админа(ов) 👔', async (ctx: any) => {

@@ -119,7 +119,7 @@ function sendGlobal(ctx) {
                     _b.label = 3;
                 case 3:
                     _b.trys.push([3, 5, , 6]);
-                    return [4 /*yield*/, ctx.telegram.sendMessage(user.chatId, ctx.message.text)];
+                    return [4 /*yield*/, ctx.telegram.sendMessage(user.chatId, ctx.message.text, { parse_mode: 'Markdown' })];
                 case 4:
                     _b.sent();
                     return [3 /*break*/, 6];
@@ -185,3 +185,31 @@ function addAdmins(chatIds) {
     });
 }
 exports.addAdmins = addAdmins;
+/**
+ * Отстраняет админа
+ * @async
+ * @function dismissAdmin
+ * @param chatId
+ * @returns { Promise<void> }
+ */
+function dismissAdmin(chatId) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _b.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, user_1.default.updateOne({ chatId: chatId }, { isAdmin: false })];
+                case 1:
+                    _b.sent();
+                    logger_1.default.notify('Админ успешно отстранён!');
+                    return [3 /*break*/, 3];
+                case 2:
+                    _a = _b.sent();
+                    throw new Error('Ошибка при отстранении админа');
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.dismissAdmin = dismissAdmin;

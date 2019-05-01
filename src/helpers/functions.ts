@@ -47,7 +47,7 @@ export async function sendGlobal(ctx: api.ContextMessageUpdate): Promise<void> {
     for (const user of users) {
         if (user.chatId != ctx.from.id) {
             try {
-                await ctx.telegram.sendMessage(user.chatId, ctx.message.text)
+                await ctx.telegram.sendMessage(user.chatId, ctx.message.text, { parse_mode: 'Markdown' })
             }
             catch {
                 throw new Error('Не удалось выполнить рассылку')
@@ -79,5 +79,22 @@ export async function addAdmins(chatIds: Array<number>): Promise<void> {
         catch {
             throw new Error('Ошибка при добавлении админов')
         }
+    }
+}
+
+/**
+ * Отстраняет админа
+ * @async
+ * @function dismissAdmin
+ * @param chatId
+ * @returns { Promise<void> }
+ */
+export async function dismissAdmin(chatId: number): Promise<void> {
+    try {
+        await User.updateOne({ chatId: chatId }, { isAdmin: false })
+        Logger.notify('Админ успешно отстранён!')
+    }
+    catch {
+        throw new Error('Ошибка при отстранении админа')
     }
 }

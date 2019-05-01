@@ -78,12 +78,20 @@ var Admin = /** @class */ (function () {
             });
         }); });
         // Обработчик для "Статистика"
-        bot.hears('Статистика 📊', function (ctx) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, stats_1.default.send(ctx)];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        }); }); });
+        bot.hears('Статистика 📊', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
+                    case 1:
+                        if (!_a.sent()) return [3 /*break*/, 3];
+                        return [4 /*yield*/, stats_1.default.send(ctx)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
         // Обработчик для "Добавить админа(ов)"
         bot.hears('Добавить админа(ов) 👔', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {

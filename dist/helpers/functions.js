@@ -39,6 +39,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = __importDefault(require("../models/user"));
+var logger_1 = __importDefault(require("../init/logger"));
+/**
+ * Получает список пользователей
+ * @async
+ * @function getUsers
+ * @returns { Promise<IUser[]> }
+ */
+function getUsers() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_1.default.find({})];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+exports.getUsers = getUsers;
+/**
+ * Получает список админов
+ * @async
+ * @function getAdmins
+ * @returns { Promise<IUser[]> }
+ */
+function getAdmins() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_1.default.find({ isAdmin: true })];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+exports.getAdmins = getAdmins;
 /**
  * Проверяет является ли пользователь админом
  * @async
@@ -64,34 +99,89 @@ exports.isAdmin = isAdmin;
  * Проводит глобальную рассылку
  * @async
  * @function sendGlobal
- * @param msg
- * @param api
+ * @param ctx
  * @returns { Promise<void> }
  */
 function sendGlobal(ctx) {
     return __awaiter(this, void 0, void 0, function () {
-        var users, _i, users_1, user;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var users, _i, users_1, user, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0: return [4 /*yield*/, user_1.default.find({})];
                 case 1:
-                    users = _a.sent();
+                    users = _b.sent();
                     _i = 0, users_1 = users;
-                    _a.label = 2;
+                    _b.label = 2;
                 case 2:
-                    if (!(_i < users_1.length)) return [3 /*break*/, 5];
+                    if (!(_i < users_1.length)) return [3 /*break*/, 7];
                     user = users_1[_i];
-                    if (!(user.chatId != ctx.from.id)) return [3 /*break*/, 4];
-                    return [4 /*yield*/, ctx.telegram.sendMessage(user.chatId, ctx.message.text)];
+                    if (!(user.chatId != ctx.from.id)) return [3 /*break*/, 6];
+                    _b.label = 3;
                 case 3:
-                    _a.sent();
-                    _a.label = 4;
+                    _b.trys.push([3, 5, , 6]);
+                    return [4 /*yield*/, ctx.telegram.sendMessage(user.chatId, ctx.message.text)];
                 case 4:
+                    _b.sent();
+                    return [3 /*break*/, 6];
+                case 5:
+                    _a = _b.sent();
+                    throw new Error('Не удалось выполнить рассылку');
+                case 6:
                     _i++;
                     return [3 /*break*/, 2];
-                case 5: return [2 /*return*/];
+                case 7: return [2 /*return*/];
             }
         });
     });
 }
 exports.sendGlobal = sendGlobal;
+/**
+ * Добавляет новых админов
+ * @async
+ * @function addAdmins
+ * @param chatIds
+ * @returns { Promise<void> }
+ */
+function addAdmins(chatIds) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _i, chatIds_1, id, user, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _i = 0, chatIds_1 = chatIds;
+                    _b.label = 1;
+                case 1:
+                    if (!(_i < chatIds_1.length)) return [3 /*break*/, 8];
+                    id = chatIds_1[_i];
+                    _b.label = 2;
+                case 2:
+                    _b.trys.push([2, 6, , 7]);
+                    return [4 /*yield*/, user_1.default.findOne({ chatId: id })];
+                case 3:
+                    user = _b.sent();
+                    return [4 /*yield*/, user.set('isAdmin', true)
+                        // Сохраняем его
+                    ]; // делаем юзера админом
+                case 4:
+                    _b.sent(); // делаем юзера админом
+                    // Сохраняем его
+                    return [4 /*yield*/, user.save(function (err) {
+                            if (!err)
+                                logger_1.default.notify('Добавлен новый админ!');
+                        })];
+                case 5:
+                    // Сохраняем его
+                    _b.sent();
+                    return [3 /*break*/, 7];
+                case 6:
+                    _a = _b.sent();
+                    throw new Error('Ошибка при добавлении админов');
+                case 7:
+                    _i++;
+                    return [3 /*break*/, 1];
+                case 8: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.addAdmins = addAdmins;

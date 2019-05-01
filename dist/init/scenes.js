@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var gsend_1 = __importDefault(require("../scenes/gsend"));
+var addAdmins_1 = __importDefault(require("../scenes/addAdmins"));
 var logger_1 = __importDefault(require("./logger"));
 var Stage = require('telegraf/stage');
 var Scenes = /** @class */ (function () {
@@ -13,6 +14,7 @@ var Scenes = /** @class */ (function () {
         try {
             var stage = new Stage(); // создаём менеджер сцен
             stage.register(gsend_1.default); // регистрируем сцену рассылки
+            stage.register(addAdmins_1.default); // регистрируем сцену добавления админов
             bot.use(stage.middleware());
             logger_1.default.trace('>>> Сцены зарегистрированы');
         }

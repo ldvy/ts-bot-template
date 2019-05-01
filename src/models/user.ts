@@ -10,7 +10,7 @@ export interface IUser extends Document {
 
 // Схема пользователя
 export const UserSchema: Schema = new Schema({
-    chatId  : { type: String, required: true, unique: true },
+    chatId  : { type: Number, required: true, unique: true },
     username: { type: String, unique: true },
     name    : { type: String },
     isAdmin : { type: Boolean }

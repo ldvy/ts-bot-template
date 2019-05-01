@@ -40,11 +40,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var functions_1 = require("../helpers/functions");
 var admin_1 = __importDefault(require("../controllers/admin"));
+var stats_1 = __importDefault(require("../controllers/stats"));
+var adminsList_1 = __importDefault(require("../controllers/adminsList"));
 var Admin = /** @class */ (function () {
     function Admin() {
     }
     Admin.init = function (bot) {
         var _this = this;
+        // Обрадотчик для "/admin"
         bot.command('admin', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -65,10 +68,48 @@ var Admin = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
                     case 1:
-                        if (_a.sent()) {
-                            ctx.scene.enter('gsend');
-                        }
-                        return [2 /*return*/];
+                        if (!_a.sent()) return [3 /*break*/, 3];
+                        return [4 /*yield*/, ctx.scene.enter('gsend')];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+        // Обработчик для "Статистика"
+        bot.hears('Статистика 📊', function (ctx) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, stats_1.default.send(ctx)];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        }); }); });
+        // Обработчик для "Добавить админа(ов)"
+        bot.hears('Добавить админа(ов) 👔', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
+                    case 1:
+                        if (!_a.sent()) return [3 /*break*/, 3];
+                        return [4 /*yield*/, ctx.scene.enter('addAdmins')];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
+                }
+            });
+        }); });
+        bot.hears('Список админов 📃', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, functions_1.isAdmin(ctx.from.id)];
+                    case 1:
+                        if (!_a.sent()) return [3 /*break*/, 3];
+                        return [4 /*yield*/, adminsList_1.default.send(ctx)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
                 }
             });
         }); });

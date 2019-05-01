@@ -54,7 +54,7 @@ var AdminMessage = /** @class */ (function () {
     AdminMessage.keyboard = Markup.keyboard([
         ['Рассылка 📡', 'Статистика 📊'],
         ['Добавить админа(ов) 👔'],
-        ['Устранить админа(ов) ✖️']
+        ['Список админов 📃']
     ]).oneTime().resize().extra();
     return AdminMessage;
 }());

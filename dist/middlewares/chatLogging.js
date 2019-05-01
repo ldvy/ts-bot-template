@@ -55,10 +55,18 @@ exports.default = (function (ctx, next) { return __awaiter(_this, void 0, void 0
                 if (ctx.from.last_name !== undefined)
                     name = ctx.from.first_name + " " + ctx.from.last_name;
                 // Логируем сообщение
-                if (username !== undefined)
-                    logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + " (@" + username + "): \"" + ctx.message.text + "\"");
-                else
-                    logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + ": \"" + ctx.message.text + "\"");
+                if (ctx.updateType !== 'callback_query') {
+                    if (username !== undefined)
+                        logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + " (@" + username + "): \"" + ctx.message.text + "\"");
+                    else
+                        logger_1.default.notify("\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E\u0442 " + name + ": \"" + ctx.message.text + "\"");
+                }
+                else {
+                    if (username !== undefined)
+                        logger_1.default.notify(name + " (@" + username + ") \u0432\u044B\u0431\u0440\u0430\u043B(\u0430): \"" + ctx.callbackQuery.data + "\"");
+                    else
+                        logger_1.default.notify(name + " \u0432\u044B\u0431\u0440\u0430\u043B(\u0430): \"" + ctx.callbackQuery.data + "\"");
+                }
                 return [4 /*yield*/, next()];
             case 1:
                 _a.sent();

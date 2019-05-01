@@ -12,6 +12,7 @@ const WizardScene = require('telegraf/scenes/wizard')
  */
 export default new WizardScene(
     'gsend',
+    // Запрашиваем сообщение
     async (ctx: any) => {
         let keyboard = Markup.keyboard([
             Markup.button('Назад')
@@ -20,16 +21,22 @@ export default new WizardScene(
         await ctx.reply('Введите сообщение для рассылки', keyboard)
         return ctx.wizard.next()
     },
+    // Финальное действие
     async (ctx: any) => {
         if (ctx.message.text === 'Назад') {
             await AdminMessage.send(ctx)
             return ctx.scene.leave()
         }
         
-        await sendGlobal(ctx)
-
-        await ctx.reply('Рассылка успешно проведена! 🎉', AdminMessage.keyboard)
-        Logger.notify(`Рассылка успешно проведена! 🎉 Админ: ${ctx.from.id}; Сообщение: "${ctx.message.text}"`)
+        try {
+            await sendGlobal(ctx)
+            await ctx.reply('Рассылка успешно проведена! 🎉', AdminMessage.keyboard)
+            Logger.notify(`Рассылка успешно проведена! 🎉 Админ: ${ctx.from.id}; Сообщение: "${ctx.message.text}"`)
+        }
+        catch (err) {
+            await ctx.reply('Не удалось выполнить рассылку, приносим извинения', AdminMessage.keyboard)
+            Logger.error(err.message)
+        }
         return ctx.scene.leave()
     }
 )

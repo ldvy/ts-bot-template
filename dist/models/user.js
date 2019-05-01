@@ -14,7 +14,7 @@ var mongoose_1 = __importStar(require("mongoose"));
 var mongoose_unique_validator_1 = __importDefault(require("mongoose-unique-validator"));
 // Схема пользователя
 exports.UserSchema = new mongoose_1.Schema({
-    chatId: { type: String, required: true, unique: true },
+    chatId: { type: Number, required: true, unique: true },
     username: { type: String, unique: true },
     name: { type: String },
     isAdmin: { type: Boolean }

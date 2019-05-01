@@ -47,10 +47,10 @@ var Markup = require('telegraf/markup');
 var Stage = require('telegraf/stage');
 var WizardScene = require('telegraf/scenes/wizard');
 /**
- * Сцена рассылки
+ * Сцена добавления админов
  */
-exports.default = new WizardScene('gsend', 
-// Запрашиваем сообщение
+exports.default = new WizardScene('addAdmins', 
+// Запрашиваем перечень chatId
 function (ctx) { return __awaiter(_this, void 0, void 0, function () {
     var keyboard;
     return __generator(this, function (_a) {
@@ -59,7 +59,7 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                 keyboard = Markup.keyboard([
                     Markup.button('Назад')
                 ]).oneTime().resize().extra();
-                return [4 /*yield*/, ctx.reply('Введите сообщение для рассылки', keyboard)];
+                return [4 /*yield*/, ctx.reply('Введите chatId новых админов (по одному на строку)\nОни должны быть пользователем бота!', keyboard)];
             case 1:
                 _a.sent();
                 return [2 /*return*/, ctx.wizard.next()];
@@ -68,7 +68,7 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
 }); }, 
 // Финальное действие
 function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var err_1;
+    var chatIds, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -79,17 +79,18 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                 return [2 /*return*/, ctx.scene.leave()];
             case 2:
                 _a.trys.push([2, 5, , 7]);
-                return [4 /*yield*/, functions_1.sendGlobal(ctx)];
+                chatIds = ctx.message.text.split('\n').map(Number);
+                return [4 /*yield*/, functions_1.addAdmins(chatIds)]; // добавляем админов
             case 3:
-                _a.sent();
-                return [4 /*yield*/, ctx.reply('Рассылка успешно проведена! 🎉', admin_1.default.keyboard)];
+                _a.sent(); // добавляем админов
+                return [4 /*yield*/, ctx.reply('Операция прошла успешно! 🎉', admin_1.default.keyboard)];
             case 4:
                 _a.sent();
-                logger_1.default.notify("\u0420\u0430\u0441\u0441\u044B\u043B\u043A\u0430 \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0430! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: " + ctx.from.id + "; \u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435: \"" + ctx.message.text + "\"");
+                logger_1.default.notify("\u041D\u043E\u0432\u044B\u0435 \u0430\u0434\u043C\u0438\u043D\u044B \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: " + ctx.from.id + "; \u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E: " + chatIds.length);
                 return [3 /*break*/, 7];
             case 5:
                 err_1 = _a.sent();
-                return [4 /*yield*/, ctx.reply('Не удалось выполнить рассылку, приносим извинения', admin_1.default.keyboard)];
+                return [4 /*yield*/, ctx.reply('Не удалось добавить новых админов, приносим извинения.\nВозможно, Вы ввели некорректные данные', admin_1.default.keyboard)];
             case 6:
                 _a.sent();
                 logger_1.default.error(err_1.message);

@@ -34,27 +34,40 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var stats_1 = __importDefault(require("../controllers/stats"));
-var Stats = /** @class */ (function () {
-    function Stats() {
+var functions_1 = require("../helpers/functions");
+var Markup = require('telegraf/markup');
+var AdminsListMessage = /** @class */ (function () {
+    function AdminsListMessage() {
     }
-    Stats.init = function (bot) {
-        var _this = this;
-        bot.hears('Статистика 📊', function (ctx) { return __awaiter(_this, void 0, void 0, function () {
+    AdminsListMessage.send = function (ctx) {
+        return __awaiter(this, void 0, void 0, function () {
+            var admins, _i, admins_1, admin, keyboard;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, stats_1.default.send(ctx)];
+                    case 0: return [4 /*yield*/, functions_1.getAdmins()];
                     case 1:
+                        admins = _a.sent();
+                        _i = 0, admins_1 = admins;
+                        _a.label = 2;
+                    case 2:
+                        if (!(_i < admins_1.length)) return [3 /*break*/, 5];
+                        admin = admins_1[_i];
+                        keyboard = Markup.inlineKeyboard([
+                            Markup.callbackButton('123', '123')
+                        ]).extra();
+                        return [4 /*yield*/, ctx.reply(admin.name, keyboard)];
+                    case 3:
                         _a.sent();
-                        return [2 /*return*/];
+                        _a.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [2 /*return*/];
                 }
             });
-        }); });
+        });
     };
-    return Stats;
+    return AdminsListMessage;
 }());
-exports.default = Stats;
+exports.default = AdminsListMessage;

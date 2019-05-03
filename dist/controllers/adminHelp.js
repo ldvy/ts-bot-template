@@ -37,47 +37,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var functions_1 = require("../helpers/functions");
 var admin_1 = __importDefault(require("./admin"));
+var texts = __importStar(require("../texts.json"));
 var Markup = require('telegraf/markup');
-var AdminsListMessage = /** @class */ (function () {
-    function AdminsListMessage() {
+var AdminsHelpMessage = /** @class */ (function () {
+    function AdminsHelpMessage() {
     }
-    AdminsListMessage.send = function (ctx) {
+    AdminsHelpMessage.send = function (ctx) {
         return __awaiter(this, void 0, void 0, function () {
-            var admins, _i, admins_1, admin, name_1, chatId, username, keyboard;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, functions_1.getAdmins()];
+                    case 0: return [4 /*yield*/, ctx.replyWithMarkdown(texts.adminHelp, admin_1.default.keyboard)];
                     case 1:
-                        admins = _a.sent();
-                        _i = 0, admins_1 = admins;
-                        _a.label = 2;
-                    case 2:
-                        if (!(_i < admins_1.length)) return [3 /*break*/, 5];
-                        admin = admins_1[_i];
-                        name_1 = admin.name;
-                        chatId = admin.chatId;
-                        username = admin.username !== undefined ? admin.username : 'не указано';
-                        keyboard = Markup.inlineKeyboard([
-                            Markup.callbackButton('Отстранить ❌ ', "dismiss>" + chatId)
-                        ]).extra();
-                        return [4 /*yield*/, ctx.replyWithMarkdown("*\u0418\u043C\u044F*: " + name_1 + "\n*\u042E\u0437\u0435\u0440\u043D\u0435\u0439\u043C*: @" + username + "\n*ChatId*: " + chatId, keyboard)];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4:
-                        _i++;
-                        return [3 /*break*/, 2];
-                    case 5: return [4 /*yield*/, admin_1.default.send(ctx)];
-                    case 6:
                         _a.sent();
                         return [2 /*return*/];
                 }
             });
         });
     };
-    return AdminsListMessage;
+    return AdminsHelpMessage;
 }());
-exports.default = AdminsListMessage;
+exports.default = AdminsHelpMessage;

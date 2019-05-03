@@ -61,7 +61,7 @@ var CallbackQuery = /** @class */ (function () {
                     case 3:
                         _a.sent();
                         ctx.answerCbQuery();
-                        ctx.reply('Админ успешно отстранён', admin_1.default.keyboard);
+                        ctx.reply('Админ успешно отстранён ✔️', admin_1.default.keyboard);
                         return [3 /*break*/, 5];
                     case 4:
                         err_1 = _a.sent();

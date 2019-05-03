@@ -47,38 +47,36 @@ export async function sendGlobal(ctx: api.ContextMessageUpdate): Promise<void> {
     for (const user of users) {
         if (user.chatId != ctx.from.id) {
             try {
-                await ctx.telegram.sendMessage(user.chatId, ctx.message.text, { parse_mode: 'Markdown' })
+                ctx.telegram.sendCopy(user.chatId, ctx.message)
             }
-            catch {
-                throw new Error('Не удалось выполнить рассылку')
+            catch (err) {
+                throw new Error(`Не удалось выполнить рассылку: ${err.message}`)
             }
         }
     }
 }
 
 /**
- * Добавляет новых админов
+ * Добавляет нового админа
  * @async
- * @function addAdmins
- * @param chatIds
+ * @function addAdmin
+ * @param chatId
  * @returns { Promise<void> }
  */
-export async function addAdmins(chatIds: Array<number>): Promise<void> {
-    for (const id of chatIds) {
-        try {
-            let user = await User.findOne({ chatId: id })
+export async function addAdmin(chatId: number): Promise<void> {
+    try {
+        let user = await User.findOne({ chatId: chatId })
 
-            await user.set('isAdmin', true) // делаем юзера админом
+        await user.set('isAdmin', true) // делаем юзера админом
 
-            // Сохраняем его
-            await user.save((err) => {
-                if (!err)
-                    Logger.notify('Добавлен новый админ!')
-            })
-        }
-        catch {
-            throw new Error('Ошибка при добавлении админов')
-        }
+        // Сохраняем его
+        await user.save((err) => {
+            if (!err)
+                Logger.notify('Добавлен новый админ!')
+        })
+    }
+    catch (err) {
+        throw new Error(`Ошибка при добавлении админа: ${err.message}`)
     }
 }
 
@@ -94,7 +92,7 @@ export async function dismissAdmin(chatId: number): Promise<void> {
         await User.updateOne({ chatId: chatId }, { isAdmin: false })
         Logger.notify('Админ успешно отстранён!')
     }
-    catch {
-        throw new Error('Ошибка при отстранении админа')
+    catch (err) {
+        throw new Error(`Ошибка при отстранении админа: ${err.message}`)
     }
 }

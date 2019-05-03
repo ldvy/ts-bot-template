@@ -1,10 +1,9 @@
 import Logger from '../init/logger'
-import { addAdmins } from '../helpers/functions'
+import { addAdmin } from '../helpers/functions'
 import AdminMessage from '../controllers/admin'
 
 // Немного модулей без типов ES5
 const Markup = require('telegraf/markup')
-const Stage = require('telegraf/stage')
 const WizardScene = require('telegraf/scenes/wizard')
 
 /**
@@ -18,7 +17,7 @@ export default new WizardScene(
             Markup.button('Назад')
         ]).oneTime().resize().extra()
 
-        await ctx.reply('Введите chatId новых админов (по одному на строку)\nОни должны быть пользователем бота!', keyboard)
+        await ctx.replyWithMarkdown('Перешлите мне сообщение от будущего админа ⏩\n*Он должен быть пользователем бота!*', keyboard)
         return ctx.wizard.next()
     },
     // Финальное действие
@@ -29,11 +28,14 @@ export default new WizardScene(
         }
         
         try {
-            let chatIds: Array<number> = ctx.message.text.split('\n').map(Number)            
-            await addAdmins(chatIds)    // добавляем админов
+            let adminId = ctx.message.forward_from.id
+            console.log(ctx)
+            console.log(adminId)
+            
+            await addAdmin(adminId)    // добавляем админов
 
             await ctx.reply('Операция прошла успешно! 🎉', AdminMessage.keyboard)
-            Logger.notify(`Новые админы добавлены! 🎉 Админ: ${ctx.from.id}; Количество: ${chatIds.length}`)
+            Logger.notify(`Новый админ(${adminId}) добавлен! 🎉 Админ: ${ctx.from.id}`)
         }
         catch (err) {
             await ctx.reply('Не удалось добавить новых админов, приносим извинения.\nВозможно, Вы ввели некорректные данные', AdminMessage.keyboard)

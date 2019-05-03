@@ -11,7 +11,7 @@ export default class CallbackQuery {
                 try {
                     await dismissAdmin(+ctx.callbackQuery.data.split('>')[1])
                     ctx.answerCbQuery()
-                    ctx.reply('Админ успешно отстранён', AdminMessage.keyboard)
+                    ctx.reply('Админ успешно отстранён ✔️', AdminMessage.keyboard)
                 }
                 catch (err) {
                     Logger.error(err)

@@ -3,12 +3,13 @@ import { isAdmin } from '../helpers/functions'
 import AdminMessage from '../controllers/admin'
 import StatsMessage from '../controllers/stats'
 import AdminsListMessage from '../controllers/adminsList'
+import AdminsHelpMessage from '../controllers/adminHelp'
 
 export default class Admin {
     public static init(bot: api.Telegraf<api.ContextMessageUpdate>) {
         // Обрадотчик для "/admin"
         bot.command('admin', async (ctx: api.ContextMessageUpdate) => {
-            if (await isAdmin(ctx.from.id)) {   // проверяем является ли пользователь админом
+            if (await isAdmin(ctx.from.id)) {
                 await AdminMessage.send(ctx)
             }
         })
@@ -34,9 +35,17 @@ export default class Admin {
             }
         })
 
+        // Обработчик для "Список админов"
         bot.hears('Список админов 📃', async (ctx: api.ContextMessageUpdate) => {
             if (await isAdmin(ctx.from.id)) {
                 await AdminsListMessage.send(ctx)
+            }
+        })
+
+        // Обработчик для "Справка админа"
+        bot.hears('Справка админа 💡', async (ctx: api.ContextMessageUpdate) => {
+            if (await isAdmin(ctx.from.id)) {
+                await AdminsHelpMessage.send(ctx)
             }
         })
     }

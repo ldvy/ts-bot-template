@@ -44,7 +44,6 @@ var functions_1 = require("../helpers/functions");
 var admin_1 = __importDefault(require("../controllers/admin"));
 // Немного модулей без типов ES5
 var Markup = require('telegraf/markup');
-var Stage = require('telegraf/stage');
 var WizardScene = require('telegraf/scenes/wizard');
 /**
  * Сцена рассылки
@@ -59,7 +58,7 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                 keyboard = Markup.keyboard([
                     Markup.button('Назад')
                 ]).oneTime().resize().extra();
-                return [4 /*yield*/, ctx.reply('Введите сообщение для рассылки', keyboard)];
+                return [4 /*yield*/, ctx.replyWithMarkdown('Введите сообщение для рассылки\n\nПри форматировании используйте *два знака разметки* вместо одного', keyboard)];
             case 1:
                 _a.sent();
                 return [2 /*return*/, ctx.wizard.next()];

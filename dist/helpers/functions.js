@@ -104,87 +104,69 @@ exports.isAdmin = isAdmin;
  */
 function sendGlobal(ctx) {
     return __awaiter(this, void 0, void 0, function () {
-        var users, _i, users_1, user, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var users, _i, users_1, user;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0: return [4 /*yield*/, user_1.default.find({})];
                 case 1:
-                    users = _b.sent();
-                    _i = 0, users_1 = users;
-                    _b.label = 2;
-                case 2:
-                    if (!(_i < users_1.length)) return [3 /*break*/, 7];
-                    user = users_1[_i];
-                    if (!(user.chatId != ctx.from.id)) return [3 /*break*/, 6];
-                    _b.label = 3;
-                case 3:
-                    _b.trys.push([3, 5, , 6]);
-                    return [4 /*yield*/, ctx.telegram.sendMessage(user.chatId, ctx.message.text, { parse_mode: 'Markdown' })];
-                case 4:
-                    _b.sent();
-                    return [3 /*break*/, 6];
-                case 5:
-                    _a = _b.sent();
-                    throw new Error('Не удалось выполнить рассылку');
-                case 6:
-                    _i++;
-                    return [3 /*break*/, 2];
-                case 7: return [2 /*return*/];
+                    users = _a.sent();
+                    for (_i = 0, users_1 = users; _i < users_1.length; _i++) {
+                        user = users_1[_i];
+                        if (user.chatId != ctx.from.id) {
+                            try {
+                                ctx.telegram.sendCopy(user.chatId, ctx.message);
+                            }
+                            catch (err) {
+                                throw new Error("\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0432\u044B\u043F\u043E\u043B\u043D\u0438\u0442\u044C \u0440\u0430\u0441\u0441\u044B\u043B\u043A\u0443: " + err.message);
+                            }
+                        }
+                    }
+                    return [2 /*return*/];
             }
         });
     });
 }
 exports.sendGlobal = sendGlobal;
 /**
- * Добавляет новых админов
+ * Добавляет нового админа
  * @async
- * @function addAdmins
- * @param chatIds
+ * @function addAdmin
+ * @param chatId
  * @returns { Promise<void> }
  */
-function addAdmins(chatIds) {
+function addAdmin(chatId) {
     return __awaiter(this, void 0, void 0, function () {
-        var _i, chatIds_1, id, user, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var user, err_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _i = 0, chatIds_1 = chatIds;
-                    _b.label = 1;
+                    _a.trys.push([0, 4, , 5]);
+                    return [4 /*yield*/, user_1.default.findOne({ chatId: chatId })];
                 case 1:
-                    if (!(_i < chatIds_1.length)) return [3 /*break*/, 8];
-                    id = chatIds_1[_i];
-                    _b.label = 2;
-                case 2:
-                    _b.trys.push([2, 6, , 7]);
-                    return [4 /*yield*/, user_1.default.findOne({ chatId: id })];
-                case 3:
-                    user = _b.sent();
+                    user = _a.sent();
                     return [4 /*yield*/, user.set('isAdmin', true)
                         // Сохраняем его
                     ]; // делаем юзера админом
-                case 4:
-                    _b.sent(); // делаем юзера админом
+                case 2:
+                    _a.sent(); // делаем юзера админом
                     // Сохраняем его
                     return [4 /*yield*/, user.save(function (err) {
                             if (!err)
                                 logger_1.default.notify('Добавлен новый админ!');
                         })];
-                case 5:
+                case 3:
                     // Сохраняем его
-                    _b.sent();
-                    return [3 /*break*/, 7];
-                case 6:
-                    _a = _b.sent();
-                    throw new Error('Ошибка при добавлении админов');
-                case 7:
-                    _i++;
-                    return [3 /*break*/, 1];
-                case 8: return [2 /*return*/];
+                    _a.sent();
+                    return [3 /*break*/, 5];
+                case 4:
+                    err_1 = _a.sent();
+                    throw new Error("\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u0438 \u0430\u0434\u043C\u0438\u043D\u0430: " + err_1.message);
+                case 5: return [2 /*return*/];
             }
         });
     });
 }
-exports.addAdmins = addAdmins;
+exports.addAdmin = addAdmin;
 /**
  * Отстраняет админа
  * @async
@@ -194,19 +176,19 @@ exports.addAdmins = addAdmins;
  */
 function dismissAdmin(chatId) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var err_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _b.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, user_1.default.updateOne({ chatId: chatId }, { isAdmin: false })];
                 case 1:
-                    _b.sent();
+                    _a.sent();
                     logger_1.default.notify('Админ успешно отстранён!');
                     return [3 /*break*/, 3];
                 case 2:
-                    _a = _b.sent();
-                    throw new Error('Ошибка при отстранении админа');
+                    err_2 = _a.sent();
+                    throw new Error("\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u0438\u0438 \u0430\u0434\u043C\u0438\u043D\u0430: " + err_2.message);
                 case 3: return [2 /*return*/];
             }
         });

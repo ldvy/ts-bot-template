@@ -4,7 +4,6 @@ import AdminMessage from '../controllers/admin'
 
 // Немного модулей без типов ES5
 const Markup = require('telegraf/markup')
-const Stage = require('telegraf/stage')
 const WizardScene = require('telegraf/scenes/wizard')
 
 /**
@@ -18,7 +17,7 @@ export default new WizardScene(
             Markup.button('Назад')
         ]).oneTime().resize().extra()
 
-        await ctx.reply('Введите сообщение для рассылки', keyboard)
+        await ctx.replyWithMarkdown('Введите сообщение для рассылки\n\nПри форматировании используйте *два знака разметки* вместо одного', keyboard)
         return ctx.wizard.next()
     },
     // Финальное действие

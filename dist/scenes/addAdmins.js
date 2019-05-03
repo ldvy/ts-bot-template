@@ -44,7 +44,6 @@ var functions_1 = require("../helpers/functions");
 var admin_1 = __importDefault(require("../controllers/admin"));
 // Немного модулей без типов ES5
 var Markup = require('telegraf/markup');
-var Stage = require('telegraf/stage');
 var WizardScene = require('telegraf/scenes/wizard');
 /**
  * Сцена добавления админов
@@ -59,7 +58,7 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                 keyboard = Markup.keyboard([
                     Markup.button('Назад')
                 ]).oneTime().resize().extra();
-                return [4 /*yield*/, ctx.reply('Введите chatId новых админов (по одному на строку)\nОни должны быть пользователем бота!', keyboard)];
+                return [4 /*yield*/, ctx.replyWithMarkdown('Перешлите мне сообщение от будущего админа ⏩\n*Он должен быть пользователем бота!*', keyboard)];
             case 1:
                 _a.sent();
                 return [2 /*return*/, ctx.wizard.next()];
@@ -68,7 +67,7 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
 }); }, 
 // Финальное действие
 function (ctx) { return __awaiter(_this, void 0, void 0, function () {
-    var chatIds, err_1;
+    var adminId, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -79,14 +78,16 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                 return [2 /*return*/, ctx.scene.leave()];
             case 2:
                 _a.trys.push([2, 5, , 7]);
-                chatIds = ctx.message.text.split('\n').map(Number);
-                return [4 /*yield*/, functions_1.addAdmins(chatIds)]; // добавляем админов
+                adminId = ctx.message.forward_from.id;
+                console.log(ctx);
+                console.log(adminId);
+                return [4 /*yield*/, functions_1.addAdmin(adminId)]; // добавляем админов
             case 3:
                 _a.sent(); // добавляем админов
                 return [4 /*yield*/, ctx.reply('Операция прошла успешно! 🎉', admin_1.default.keyboard)];
             case 4:
                 _a.sent();
-                logger_1.default.notify("\u041D\u043E\u0432\u044B\u0435 \u0430\u0434\u043C\u0438\u043D\u044B \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: " + ctx.from.id + "; \u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E: " + chatIds.length);
+                logger_1.default.notify("\u041D\u043E\u0432\u044B\u0439 \u0430\u0434\u043C\u0438\u043D(" + adminId + ") \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: " + ctx.from.id);
                 return [3 /*break*/, 7];
             case 5:
                 err_1 = _a.sent();

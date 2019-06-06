@@ -37,7 +37,7 @@ There are `dev` and `prod` objects. Using them depends on your `NODE_ENV`
 ```
 At `index.ts` we configure our bot and initialize [Telegraf middlewares](https://telegraf.js.org/#/?id=middleware), [scenes](https://telegraf.js.org/#/?id=stage), message handlers and DB connection.
 
-```javascript
+```typescript
 import Bot from './init/bot'
 import DB from './init/db'
 import Handlers from './init/handlers'

@@ -21,7 +21,7 @@
 ### So, let's learn how to build bots with TS-Bot-Template!
 Firstly, you should insert your connection data into `config.json`  
 There are `dev` and `prod` objects. Using them depends on your `NODE_ENV`
-```json
+```javascript
 {
     "dev": {
         "token": "<TOKEN>",

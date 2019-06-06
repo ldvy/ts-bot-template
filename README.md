@@ -51,3 +51,58 @@ Scenes.init(bot)            // initializing scenes
 Handlers.init(bot)          // initializing handlers
 DB.connect()                // connecting to DB
 ```
+You can use `texts.json` to put here texts for your messages.
+
+#### Let's explore our folders
+* `init` folder keeps modules, that help us init everything we need;
+* `middlewares` folder keeps our custom middlewares;
+* `controllers` folder keeps routes files. They represents a class of Message with their own keyboard;
+* `handlers` folder keeps message handlers;
+* `helpers` folder keeps additional functions you may need during development. You can expand existing files and create new;
+* `scenes` folder keeps scenes (dialog scripts);
+* `models` folder keeps models and schemas for Mongoose.
+
+#### How to create custom handlers, scenes, middlewares etc?
+You should create new file as in example and register it in the relevant file in `init` folder. Import it and call `init` function with bot instance as argument.  
+```typescript
+import * as api from 'telegraf'
+import YourHandler from '../handlers/yourHandler'
+
+export default class Handlers {
+    public static init(bot: api.Telegraf<api.ContextMessageUpdate>): void {
+        try {
+            // ...
+            YourHandler.init(bot)
+        }
+        catch {
+            // ...
+        }
+    }
+}
+```
+What about scenes, import it in `init/scenes.ts` and call `stage.register` with your scene as argument.
+```typescript
+import * as api from 'telegraf'
+import YourScene from '../scenes/yourScene'
+
+export default class Scenes {
+    public static init(bot: api.Telegraf<api.ContextMessageUpdate>): void {
+        try {
+            // ...
+            stage.register(YourScene)
+            // ...
+        }
+        catch {
+            // ...
+        }
+    }
+}
+```
+
+### You have working bot from the box!
+Put your connection data and use a bot. You have an admin panel inside the bot from the box.  
+Use `/admin` command to access it.  
+**Important!** Admin must have `isAdmin: true` in his DB document.
+## Happy coding!
+
+P.S Comments and logs are in Russian, but you can rewrite it ;)

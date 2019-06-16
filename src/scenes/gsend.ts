@@ -30,9 +30,8 @@ export default new WizardScene(
         try {
             await sendGlobal(ctx)
             await ctx.reply('Рассылка успешно проведена! 🎉', AdminMessage.keyboard)
-            Logger.notify(`Рассылка успешно проведена! 🎉 Админ: ${ctx.from.id}; Сообщение: "${ctx.message.text}"`)
-        }
-        catch (err) {
+            Logger.notify(`Рассылка успешно проведена! 🎉 Админ: @${ctx.from.username}; Сообщение: "${ctx.message.text}"`)
+        } catch (err) {
             await ctx.reply('Не удалось выполнить рассылку, приносим извинения', AdminMessage.keyboard)
             Logger.error(err.message)
         }

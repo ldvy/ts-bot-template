@@ -84,7 +84,7 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                 return [4 /*yield*/, ctx.reply('Рассылка успешно проведена! 🎉', admin_1.default.keyboard)];
             case 4:
                 _a.sent();
-                logger_1.default.notify("\u0420\u0430\u0441\u0441\u044B\u043B\u043A\u0430 \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0430! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: " + ctx.from.id + "; \u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435: \"" + ctx.message.text + "\"");
+                logger_1.default.notify("\u0420\u0430\u0441\u0441\u044B\u043B\u043A\u0430 \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u043F\u0440\u043E\u0432\u0435\u0434\u0435\u043D\u0430! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: @" + ctx.from.username + "; \u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435: \"" + ctx.message.text + "\"");
                 return [3 /*break*/, 7];
             case 5:
                 err_1 = _a.sent();

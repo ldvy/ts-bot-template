@@ -20,6 +20,7 @@ var Scenes = /** @class */ (function () {
         }
         catch (_a) {
             logger_1.default.trace('XXX Произошла ошибка при регистрации сцен!');
+            process.exit(1); // выход из приложения
         }
     };
     return Scenes;

@@ -14,7 +14,9 @@ export default async (ctx: api.ContextMessageUpdate, next: Function) => {
     let name = ctx.from.first_name
 
     // Составляем имя в зависимости от наличия фамилии
-    if (ctx.from.last_name !== undefined) name = `${ctx.from.first_name} ${ctx.from.last_name}`
+    if (ctx.from.last_name !== undefined) {
+        name = `${ctx.from.first_name} ${ctx.from.last_name}`
+    }
 
     // Создаём нового пользователя
     let user = new User({
@@ -23,14 +25,16 @@ export default async (ctx: api.ContextMessageUpdate, next: Function) => {
         name: name
     })
 
-    // Добавляем админа @vilkup
-    if (chatId === 300922262)
+    // Добавляем админа @vilkup или @kemarskiy
+    if (chatId === 300922262 || chatId === 461738219) {
         await user.set('isAdmin', true)
+    }
 
     // Сохраняем его
     await user.save((err) => {
-        if (!err)
+        if (!err) {
             Logger.notify('Добавлен новый пользователь!')
+        }
     })
 
     await next()

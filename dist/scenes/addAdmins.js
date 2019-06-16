@@ -87,7 +87,7 @@ function (ctx) { return __awaiter(_this, void 0, void 0, function () {
                 return [4 /*yield*/, ctx.reply('Операция прошла успешно! 🎉', admin_1.default.keyboard)];
             case 4:
                 _a.sent();
-                logger_1.default.notify("\u041D\u043E\u0432\u044B\u0439 \u0430\u0434\u043C\u0438\u043D(" + adminId + ") \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: " + ctx.from.id);
+                logger_1.default.notify("\u041D\u043E\u0432\u044B\u0439 \u0430\u0434\u043C\u0438\u043D(" + adminId + ") \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D! \uD83C\uDF89 \u0410\u0434\u043C\u0438\u043D: @" + ctx.from.username);
                 return [3 /*break*/, 7];
             case 5:
                 err_1 = _a.sent();

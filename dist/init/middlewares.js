@@ -19,6 +19,7 @@ var Middlewares = /** @class */ (function () {
         }
         catch (_a) {
             logger_1.default.trace('XXX Произошла ошибка при инициализации прослоек!');
+            process.exit(1); // выход из приложения
         }
     };
     return Middlewares;

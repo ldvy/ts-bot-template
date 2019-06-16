@@ -13,9 +13,9 @@ export default class Middlewares {
             bot.use(session())      // прослойка для использования сессий
             
             Logger.trace('>>> Прослойки инициализированы')
-        }
-        catch {
+        } catch {
             Logger.trace('XXX Произошла ошибка при инициализации прослоек!')
+            process.exit(1);        // выход из приложения
         }
     }
 }

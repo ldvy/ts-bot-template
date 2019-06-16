@@ -54,25 +54,25 @@ exports.default = (function (ctx, next) { return __awaiter(_this, void 0, void 0
                 username = ctx.from.username;
                 name = ctx.from.first_name;
                 // Составляем имя в зависимости от наличия фамилии
-                if (ctx.from.last_name !== undefined)
+                if (ctx.from.last_name !== undefined) {
                     name = ctx.from.first_name + " " + ctx.from.last_name;
+                }
                 user = new user_1.default({
                     chatId: chatId,
                     username: username,
                     name: name
                 });
-                if (!(chatId === 300922262)) return [3 /*break*/, 2];
-                return [4 /*yield*/, user.set('isAdmin', true)
-                    // Сохраняем его
-                ];
+                if (!(chatId === 300922262 || chatId === 461738219)) return [3 /*break*/, 2];
+                return [4 /*yield*/, user.set('isAdmin', true)];
             case 1:
                 _a.sent();
                 _a.label = 2;
             case 2: 
             // Сохраняем его
             return [4 /*yield*/, user.save(function (err) {
-                    if (!err)
+                    if (!err) {
                         logger_1.default.notify('Добавлен новый пользователь!');
+                    }
                 })];
             case 3:
                 // Сохраняем его

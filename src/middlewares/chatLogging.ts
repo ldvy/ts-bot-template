@@ -12,20 +12,23 @@ export default async (ctx: api.ContextMessageUpdate, next: Function) => {
     let name = ctx.from.first_name
 
     // Составляем имя в зависимости от наличия фамилии
-    if (ctx.from.last_name !== undefined) name = `${ctx.from.first_name} ${ctx.from.last_name}`
+    if (ctx.from.last_name !== undefined) {
+        name = `${ctx.from.first_name} ${ctx.from.last_name}`
+    }
 
     // Логируем сообщение
     if (ctx.updateType !== 'callback_query') {
-        if (username !== undefined)
+        if (username !== undefined) {
             Logger.notify(`Сообщение от ${name} (@${username}): "${ctx.message.text}"`)
-        else
+        } else {
             Logger.notify(`Сообщение от ${name}: "${ctx.message.text}"`)
-    }
-    else {
-        if (username !== undefined)
+        }
+    } else {
+        if (username !== undefined) {
             Logger.notify(`${name} (@${username}) выбрал(а): "${ctx.callbackQuery.data}"`)
-        else
+        } else {
             Logger.notify(`${name} выбрал(а): "${ctx.callbackQuery.data}"`)
+        }
     }
 
     await next()

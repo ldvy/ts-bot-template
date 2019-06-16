@@ -35,9 +35,8 @@ export default new WizardScene(
             await addAdmin(adminId)    // добавляем админов
 
             await ctx.reply('Операция прошла успешно! 🎉', AdminMessage.keyboard)
-            Logger.notify(`Новый админ(${adminId}) добавлен! 🎉 Админ: ${ctx.from.id}`)
-        }
-        catch (err) {
+            Logger.notify(`Новый админ(${adminId}) добавлен! 🎉 Админ: @${ctx.from.username}`)
+        } catch (err) {
             await ctx.reply('Не удалось добавить новых админов, приносим извинения.\nВозможно, Вы ввели некорректные данные', AdminMessage.keyboard)
             Logger.error(err.message)
         }

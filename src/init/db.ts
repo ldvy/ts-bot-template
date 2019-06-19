@@ -1,7 +1,7 @@
 import * as path from 'path'
 import mongoose from 'mongoose'
 import Logger from './logger.js'
-import IConfig from '../interfaces/IConfig.js'
+import IConfig from '../interfaces/IConfig'
 
 const config: IConfig = require(path.join(process.cwd(), 'config', 'config.json'))
 

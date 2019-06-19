@@ -42,7 +42,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = __importDefault(require("../init/logger"));
 var functions_1 = require("../helpers/functions");
 var admin_1 = __importDefault(require("../controllers/admin"));
-// Немного модулей без типов ES5
 var Scene = require('telegraf/scenes/base');
 var Markup = require('telegraf/markup');
 /**

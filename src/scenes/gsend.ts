@@ -2,7 +2,6 @@ import Logger from '../init/logger'
 import { sendGlobal } from '../helpers/functions'
 import AdminMessage from '../controllers/admin'
 
-// Немного модулей без типов ES5
 const Scene = require('telegraf/scenes/base')
 const Markup = require('telegraf/markup')
 

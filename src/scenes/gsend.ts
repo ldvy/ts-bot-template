@@ -1,5 +1,5 @@
 import AdminMessage from '../controllers/admin'
-import {sendGlobal} from '../helpers/functions'
+import { sendGlobal } from '../helpers/functions'
 import Logger from '../init/logger'
 
 const Scene = require('telegraf/scenes/base')
@@ -29,7 +29,7 @@ gsend.on('text', async (ctx: any) => {
     try {
         await sendGlobal(ctx)
         await ctx.reply('Рассылка успешно проведена! 🎉', AdminMessage.keyboard)
-        Logger.notify(`Рассылка успешно проведена! 🎉 Админ: @${ctx.from.username}; Сообщение: "${ctx.message.text}"`)
+        Logger.notify(`Рассылка успешно проведена! 🎉 Админ: @${ ctx.from.username }; Сообщение: "${ ctx.message.text }"`)
     }
     catch (err) {
         await ctx.reply('Не удалось выполнить рассылку, приносим извинения', AdminMessage.keyboard)

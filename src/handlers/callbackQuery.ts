@@ -1,6 +1,6 @@
 import * as api from 'telegraf'
 import AdminMessage from '../controllers/admin'
-import {dismissAdmin, isAdmin} from '../helpers/functions'
+import { dismissAdmin, isAdmin } from '../helpers/functions'
 import Logger from '../init/logger'
 
 export default class CallbackQuery {

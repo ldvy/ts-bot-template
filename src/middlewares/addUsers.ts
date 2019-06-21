@@ -15,7 +15,7 @@ export default async (ctx: api.ContextMessageUpdate, next: Function) => {
 
     // Составляем имя в зависимости от наличия фамилии
     if (ctx.from.last_name !== undefined) {
-        name = `${ctx.from.first_name} ${ctx.from.last_name}`
+        name = `${ ctx.from.first_name } ${ ctx.from.last_name }`
     }
 
     // Создаём нового пользователя

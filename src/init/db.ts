@@ -15,7 +15,7 @@ export default class DB {
         // Подключение к базе данных
         mongoose.connect(this.url, { useNewUrlParser: true, keepAlive: true, useCreateIndex: true }, (err: any) => {
             if (err) {
-                Logger.fatal(`XXX Возникла ошибка при подключении к MongoDB! Текст ошибки: \n${ err.message }`)
+                Logger.fatal(`XXX Возникла ошибка при подключении к MongoDB! Текст ошибки: \n${err.message}`)
                 process.exit(1)     // Выход из приложения
             }
             else {

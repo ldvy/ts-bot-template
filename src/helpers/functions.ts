@@ -50,7 +50,7 @@ export async function sendGlobal(ctx: api.ContextMessageUpdate): Promise<void> {
                 await ctx.telegram.sendCopy(user.chatId, ctx.message)
             }
             catch (err) {
-                throw new Error(`Не удалось выполнить рассылку: ${ err.message }`)
+                throw new Error(`Не удалось выполнить рассылку: ${err.message}`)
             }
         }
     }
@@ -76,7 +76,7 @@ export async function addAdmin(chatId: number): Promise<void> {
         })
     }
     catch (err) {
-        throw new Error(`Ошибка при добавлении админа: ${ err.message }`)
+        throw new Error(`Ошибка при добавлении админа: ${err.message}`)
     }
 }
 
@@ -93,6 +93,6 @@ export async function dismissAdmin(chatId: number): Promise<void> {
         Logger.notify('Админ успешно отстранён!')
     }
     catch (err) {
-        throw new Error(`Ошибка при отстранении админа: ${ err.message }`)
+        throw new Error(`Ошибка при отстранении админа: ${err.message}`)
     }
 }

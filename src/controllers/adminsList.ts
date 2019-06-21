@@ -1,5 +1,5 @@
 import * as api from 'telegraf'
-import { getAdmins } from '../helpers/functions'
+import {getAdmins} from '../helpers/functions'
 import AdminMessage from './admin'
 
 const Markup = require('telegraf/markup')

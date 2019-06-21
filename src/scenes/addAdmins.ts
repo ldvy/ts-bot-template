@@ -1,6 +1,6 @@
-import Logger from '../init/logger'
-import { addAdmin } from '../helpers/functions'
 import AdminMessage from '../controllers/admin'
+import {addAdmin} from '../helpers/functions'
+import Logger from '../init/logger'
 
 const Scene = require('telegraf/scenes/base')
 const Markup = require('telegraf/markup')
@@ -32,7 +32,8 @@ addAdmins.on('message', async (ctx: any) => {
 
         await ctx.reply('Операция прошла успешно! 🎉', AdminMessage.keyboard)
         Logger.notify(`Новый админ(${adminId}) добавлен! 🎉 Админ: @${ctx.from.username}`)
-    } catch (err) {
+    }
+    catch (err) {
         await ctx.reply('Не удалось добавить новых админов, приносим извинения.\nВозможно, Вы ввели некорректные данные', AdminMessage.keyboard)
         Logger.error(err.message)
     }

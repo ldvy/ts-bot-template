@@ -1,1 +1,10 @@
-{"version":3,"file":"adminHelp.js","sourceRoot":"","sources":["../../src/controllers/adminHelp.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AACA,kDAAkC;AAClC,mDAAsC;AAEtC,IAAM,MAAM,GAAG,OAAO,CAAC,iBAAiB,CAAC,CAAA;AAEzC;IAAA;IAIA,CAAC;IAHuB,sBAAI,GAAxB,UAAyB,GAA6B;;;;4BAClD,qBAAM,GAAG,CAAC,iBAAiB,CAAC,KAAK,CAAC,SAAS,EAAE,eAAY,CAAC,QAAQ,CAAC,EAAA;;wBAAnE,SAAmE,CAAA;;;;;KACtE;IACL,wBAAC;AAAD,CAAC,AAJD,IAIC"}
+{
+  "version": 3,
+  "file": "adminHelp.js",
+  "sourceRoot": "",
+  "sources": [
+	"../../src/controllers/adminHelp.ts"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AACA,kDAAkC;AAClC,mDAAsC;AAEtC,IAAM,MAAM,GAAG,OAAO,CAAC,iBAAiB,CAAC,CAAA;AAEzC;IAAA;IAIA,CAAC;IAHuB,sBAAI,GAAxB,UAAyB,GAA6B;;;;4BAClD,qBAAM,GAAG,CAAC,iBAAiB,CAAC,KAAK,CAAC,SAAS,EAAE,eAAY,CAAC,QAAQ,CAAC,EAAA;;wBAAnE,SAAmE,CAAA;;;;;KACtE;IACL,wBAAC;AAAD,CAAC,AAJD,IAIC"
+}

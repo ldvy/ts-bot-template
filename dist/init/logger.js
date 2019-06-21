@@ -6,11 +6,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", {value: true});
 var path = __importStar(require("path"));
 var Logger = /** @class */ (function () {
     function Logger() {
     }
+
     Logger.trace = function (data) {
         this.logger.log('trace', data);
     };

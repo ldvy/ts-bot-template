@@ -1,6 +1,6 @@
-import Logger from '../init/logger'
-import { sendGlobal } from '../helpers/functions'
 import AdminMessage from '../controllers/admin'
+import {sendGlobal} from '../helpers/functions'
+import Logger from '../init/logger'
 
 const Scene = require('telegraf/scenes/base')
 const Markup = require('telegraf/markup')
@@ -30,7 +30,8 @@ gsend.on('text', async (ctx: any) => {
         await sendGlobal(ctx)
         await ctx.reply('Рассылка успешно проведена! 🎉', AdminMessage.keyboard)
         Logger.notify(`Рассылка успешно проведена! 🎉 Админ: @${ctx.from.username}; Сообщение: "${ctx.message.text}"`)
-    } catch (err) {
+    }
+    catch (err) {
         await ctx.reply('Не удалось выполнить рассылку, приносим извинения', AdminMessage.keyboard)
         Logger.error(err.message)
     }
@@ -43,6 +44,8 @@ gsend.on('callback_query', async (ctx: any) => {
             await ctx.scene.leave()
             await AdminMessage.send(ctx)
             break
+        default:
+
     }
 })
 export default gsend

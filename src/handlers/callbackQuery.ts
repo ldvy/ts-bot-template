@@ -1,6 +1,6 @@
 import * as api from 'telegraf'
 import AdminMessage from '../controllers/admin'
-import { dismissAdmin, isAdmin } from '../helpers/functions'
+import {dismissAdmin, isAdmin} from '../helpers/functions'
 import Logger from '../init/logger'
 
 export default class CallbackQuery {
@@ -12,7 +12,8 @@ export default class CallbackQuery {
                     await dismissAdmin(+ctx.callbackQuery.data.split('>')[1])
                     ctx.answerCbQuery()
                     ctx.reply('Админ успешно отстранён ✔️', AdminMessage.keyboard)
-                } catch (err) {
+                }
+                catch (err) {
                     Logger.error(err)
                     ctx.answerCbQuery()
                     ctx.reply('Не удалось отстранить админа, приносим извинения', AdminMessage.keyboard)

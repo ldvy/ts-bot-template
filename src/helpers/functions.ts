@@ -47,7 +47,7 @@ export async function sendGlobal(ctx: api.ContextMessageUpdate): Promise<void> {
     for (const user of users) {
         if (user.chatId != ctx.from.id) {
             try {
-                ctx.telegram.sendCopy(user.chatId, ctx.message)
+                await ctx.telegram.sendCopy(user.chatId, ctx.message)
             }
             catch (err) {
                 throw new Error(`Не удалось выполнить рассылку: ${err.message}`)

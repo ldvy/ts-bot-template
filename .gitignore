@@ -1,6 +1,6 @@
 .idea/
 .vscode/
-config/config.json
+config.json
 logfile.log
 node_modules/
 TODO

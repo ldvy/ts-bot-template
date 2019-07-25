@@ -6,7 +6,8 @@
   "scripts": {
 	"clean": "rm -rf dist",
 	"build": "npm run clean && tsc --watch false",
-	"run": "npm run build && node dist/index.js"
+	"run": "npm run build && node dist/index.js",
+	"dev": "nodemon dist/"
   },
   "repository": {
 	"type": "git",

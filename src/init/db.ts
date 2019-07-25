@@ -1,9 +1,6 @@
 import mongoose from 'mongoose'
-import * as path from 'path'
-import IConfig from '../interfaces/IConfig'
+import config from '../config.json'
 import Logger from './logger.js'
-
-const config: IConfig = require(path.join(process.cwd(), 'config', 'config.json'))
 
 export default class DB {
   private static url: string

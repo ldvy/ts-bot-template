@@ -17,20 +17,20 @@ export default async (ctx: api.ContextMessageUpdate, next: Function) => {
   }
   
   // Логируем сообщение
-  if (ctx.updateType !== 'callback_query') {
-    if (username !== undefined) {
-      Logger.notify(`Сообщение от ${name} (@${username}): "${ctx.message.text}"`)
-    }
-    else {
-      Logger.notify(`Сообщение от ${name}: "${ctx.message.text}"`)
-    }
-  }
-  else {
+  if (ctx.updateType === 'callback_query') {
     if (username !== undefined) {
       Logger.notify(`${name} (@${username}) выбрал(а): "${ctx.callbackQuery.data}"`)
     }
     else {
       Logger.notify(`${name} выбрал(а): "${ctx.callbackQuery.data}"`)
+    }
+  }
+  else if (ctx.updateType === 'message') {
+    if (username !== undefined) {
+      Logger.notify(`Сообщение от ${name} (@${username}): "${ctx.message.text}"`)
+    }
+    else {
+      Logger.notify(`Сообщение от ${name}: "${ctx.message.text}"`)
     }
   }
   

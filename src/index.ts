@@ -4,9 +4,14 @@ import Handlers from './init/handlers'
 import Middlewares from './init/middlewares'
 import Scenes from './init/scenes'
 
-const bot = Bot.configure() // конфигурируем бот
+const main = async () => {
+  await DB.connect()                // подключаемся к БД
+  
+  const bot = await Bot.configure() // конфигурируем бот
+  
+  Middlewares.init(bot)             // инициализируем прослойки
+  Scenes.init(bot)                  // инициализируем сцены
+  Handlers.init(bot)                // инициализируем обработчики
+}
 
-Middlewares.init(bot)       // инициализируем прослойки
-Scenes.init(bot)            // инициализируем сцены
-Handlers.init(bot)          // инициализируем обработчики
-DB.connect()                // подключаемся к БД
+main()

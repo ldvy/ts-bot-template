@@ -20,11 +20,11 @@ export default async (ctx: api.ContextMessageUpdate, next: Function) => {
   
   let insertDoc: any = {
     chatId: chatId,
-    name: name,
-    isAdmin: isAdmin
+    name: name
   }
   
   if (username) insertDoc.username = username
+  if (isAdmin) insertDoc.isAdmin = true
   
   await User.findOneAndUpdate({ chatId: chatId },
     insertDoc,

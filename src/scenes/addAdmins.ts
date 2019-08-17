@@ -6,7 +6,7 @@ const Scene = require('telegraf/scenes/base')
 const Markup = require('telegraf/markup')
 
 /**
- * Сцена рассылки
+ * Сцена добавления админа
  */
 const addAdmins = new Scene('addAdmins')
 

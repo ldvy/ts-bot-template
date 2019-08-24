@@ -11,4 +11,4 @@ const config = {
   }
 }
 
-export default config
+export default process.env.NODE_ENV === 'production' ? config.prod : config.dev

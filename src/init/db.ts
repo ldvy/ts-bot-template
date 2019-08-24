@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import config from '../config.json'
+import config from '../config'
 import Logger from './logger.js'
 
 export default class DB {
@@ -7,7 +7,7 @@ export default class DB {
   
   public static async connect() {
     // Проверка окружения и смена url базы данных
-    this.url = process.env.NODE_ENV === 'production' ? config.prod.dbUrl : config.dev.dbUrl
+    this.url = config.dbUrl
     
     // Подключение к базе данных
     mongoose.connect(this.url, { useNewUrlParser: true, keepAlive: true, useCreateIndex: true }, (err: any) => {

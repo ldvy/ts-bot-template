@@ -1,5 +1,5 @@
 import Telegraf from 'telegraf'
-import config from '../config.json'
+import config from '../config'
 import Logger from './logger'
 
 export default class Bot {
@@ -7,7 +7,7 @@ export default class Bot {
   
   public static async configure() {
     // Проверка окружения и смена токена
-    this.token = process.env.NODE_ENV === 'production' ? config.prod.token : config.dev.token
+    this.token = config.token
     
     const bot = new Telegraf(this.token)    // Создание обьекта
     await bot.launch()                      // Запуск

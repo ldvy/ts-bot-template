@@ -9,9 +9,10 @@ export default class Bot {
     this.token = config.token
     
     const bot = new Telegraf(this.token)
+    const { secretPath, port } = config.webhook
   
     if (config.webhook.useWebhook) {
-      bot.startWebhook('/secret-path', null, 5000)
+      bot.startWebhook(secretPath, null, port)
     }
     
     await bot.launch()

@@ -8,9 +8,15 @@ export default class DB {
   public static async connect() {
     // Проверка окружения и смена url базы данных
     this.url = config.dbUrl
+  
+    // Устранение deprecations
+    mongoose.set('useNewUrlParser', true)
+    mongoose.set('useFindAndModify', false)
+    mongoose.set('useCreateIndex', true)
+    mongoose.set('useUnifiedTopology', true)
     
     // Подключение к базе данных
-    mongoose.connect(this.url, { useNewUrlParser: true, keepAlive: true, useCreateIndex: true }, (err: any) => {
+    mongoose.connect(this.url, (err: any) => {
       if (err) {
         Logger.fatal(`XXX Возникла ошибка при подключении к MongoDB! Текст ошибки: \n${err.message}`)
         process.exit(1)     // Выход из приложения

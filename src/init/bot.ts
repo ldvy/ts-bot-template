@@ -6,11 +6,16 @@ export default class Bot {
   private static token: string
   
   public static async configure() {
-    // Проверка окружения и смена токена
     this.token = config.token
     
-    const bot = new Telegraf(this.token)    // Создание обьекта
-    await bot.launch()                      // Запуск
+    const bot = new Telegraf(this.token)
+    const { secretPath, port } = config.webhook
+  
+    if (config.webhook.useWebhook) {
+      bot.startWebhook(secretPath, null, port)
+    }
+    
+    await bot.launch()
     
     Logger.trace('>>> Бот сконфигурирован')
     return bot
